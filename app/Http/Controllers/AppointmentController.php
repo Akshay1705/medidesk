@@ -35,15 +35,28 @@ class AppointmentController extends Controller
     }
 
 
-    public function completed()
+    public function completed(Request $request)
     {
-        $appointments = Appointment::where('is_done', true)
+        $query = Appointment::where('is_done', true);
+
+        // Apply search filter
+        if ($search = $request->input('search')) {
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('phone', 'like', "%{$search}%");
+            });
+        }
+
+        // Sort by latest date and time
+        $appointments = $query
             ->orderByDesc('appointment_date')
             ->orderByDesc('appointment_time')
-            ->get();
+            ->paginate(10)
+            ->withQueryString(); // Keeps search query in pagination links
 
         return Inertia::render('CompletedList', [
             'appointments' => $appointments,
+            'filters' => $request->only('search'),
         ]);
     }
 

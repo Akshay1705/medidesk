@@ -147,7 +147,7 @@ const formatTime = (timeStr) => {
         class="px-3 py-1 text-sm border rounded"
         :class="[
           link.active ? 'bg-blue-600 text-white font-semibold' : '',
-          !link.url ? 'text-gray-400 border-gray-300 cursor-not-allowed' : 'hover:bg-gray-100'
+          !link.url ? 'text-gray-400 border-gray-300 cursor-not-allowed' : 'hover:bg-blue-400'
         ]"
       />
     </div>
