@@ -11,6 +11,8 @@ A modern single-page application for managing clinic appointments, built using *
 - ❌ Cancel/delete appointments
 - 📅 Sort by date & time (ascending)
 - 💨 SPA experience with Inertia.js
+- 📊 Export appointments to Excel
+- 🔍 Search and paginate completed appointments
 
 ## 📸 Screenshots
 
@@ -22,16 +24,25 @@ A modern single-page application for managing clinic appointments, built using *
 - **Frontend:** Vue 3 + Inertia.js
 - **Styling:** Tailwind CSS
 - **Database:** MySQL / SQLite
+- **Container:** Docker & Docker Compose
 
 ## 🧪 Setup Instructions
 
+### Option 1: Docker (Recommended)
 ```bash
-git clone https://github.com/your-username/clinic-appointment-app.git
-cd clinic-appointment-app
+git clone https://github.com/your-username/medidesk.git
+cd medidesk
 
-cp .env.example .env
-composer install
-npm install && npm run dev
+cp .env.docker .env
+docker-compose up -d --build
 
-php artisan key:generate
-php artisan migrate
+# Wait for services to initialize
+docker-compose logs -f
+```
+
+For detailed Docker setup, see [DOCKER_SETUP.md](DOCKER_SETUP.md)
+
+**Access:**
+- 🌐 App: http://localhost:8080
+- ⚡ Vite: http://localhost:5173
+- 📊 PhpMyAdmin: http://localhost:8081 (root/root)
